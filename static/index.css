@@ -1,0 +1,121 @@
+/* filepath: c:\Users\lakhe\OneDrive\Documents\Ratana\CSP Project\static/index.css */
+/* Basic reset and sensible defaults */
+* { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial; background: #f3f6fb; color: #222; }
+
+/* Top nav: fixed and centered */
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 0.75rem 1rem;
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(4px);
+    box-shadow: 0 1px 6px rgba(20,20,40,0.06);
+    z-index: 10;
+}
+nav a {
+    text-decoration: none;
+    color: #064e3b;
+    font-weight: 600;
+    padding: 0.25rem 0.5rem;
+}
+
+/* Layout: center the card in the viewport (leaving room for the nav) */
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding-top: 3.5rem; /* make space for fixed nav */
+}
+
+/* The rounded centered box containing welcome + login */
+main {
+    width: min(420px, 92%);
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 2.25rem;
+    box-shadow: 0 10px 30px rgba(20,30,60,0.08);
+    text-align: center; /* header centered visually */
+}
+
+/* Heading sizes and spacing */
+main h1 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.8rem; /* larger welcome message */
+    font-weight: 700;
+    color: #072f2e;
+}
+main h2 {
+    margin: 0 0 1rem 0;
+    font-size: 1.05rem; /* login label slightly smaller */
+    color: #334155;
+    font-weight: 600;
+}
+
+/* Form centered as a block within the card */
+form {
+    width: 320px;        /* fixed form width */
+    max-width: 92%;      /* responsive fallback */
+    margin: 0 auto;      /* centers the form inside the card */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch; /* inputs take full form width */
+    gap: 0.5rem;
+}
+
+/* Label above each input, left-aligned to the input area */
+form label {
+    display: block;
+    font-size: 0.9rem;
+    margin-bottom: 0.15rem;
+    color: #334155;
+    text-align: left;
+}
+
+/* Inputs styling */
+form input[type="text"],
+form input[type="password"] {
+    width: 100%;
+    padding: 0.55rem 0.65rem;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 0.98rem;
+    background: #fbfdff;
+    outline: none;
+    transition: border-color 0.15s, box-shadow 0.15s;
+}
+form input[type="text"]:focus,
+form input[type="password"]:focus {
+    border-color: #0ea5a4;
+    box-shadow: 0 0 0 4px rgba(14,165,164,0.06);
+}
+
+/* Submit button placed under inputs, left edge aligned with inputs.
+     Since the form has a fixed width and is centered in the card, the button
+     will appear aligned with the inputs and be visually centered as a group. */
+form button[type="submit"] {
+    margin-top: 0.75rem;
+    align-self: flex-start; /* left-align inside the centered form */
+    padding: 0.55rem 0.9rem;
+    border: none;
+    border-radius: 8px;
+    background: #0ea5a4;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 6px 14px rgba(14,165,164,0.12);
+}
+form button[type="submit"]:hover {
+    background: #089890;
+}
+
+/* Small responsive tweak */
+@media (max-width: 360px) {
+    main { padding: 1.25rem; border-radius: 12px; }
+    form { width: 100%; }
+}
