@@ -1,5 +1,22 @@
+# Virtual environment
 venv/
+env/
+
+# Python cache
 __pycache__/
 *.pyc
+*.pyo
+
+# SQLite database (optional — you may want to keep the init script but not the db file)
 *.db
+
+# Environment variables
 .env
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
