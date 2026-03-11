@@ -16,7 +16,7 @@ def login():
     By passes getting the right username and password, will return first row.
 
     ' UNION SELECT 1, group_concat(username || ':' || password), 'x' FROM users --
-    Grabs the users table and combines the data in the right formate to display as one string.
+    Grabs the users table and combines the data in the right format to display as one string.
     """
 
     username = request.form['username']
