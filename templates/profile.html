@@ -8,10 +8,13 @@
 </head>
 <body>
     <nav>
-        <a href="{{ url_for('union') }}">Go to UNION</a>
+        <a href="{{ url_for('index') }}">Go to Routes</a>
     </nav>
 
     <main>
+        <section>
+            <h1>Login Mode: {{ mode }}</h1>
+        </section>
         <section>
             <h1>Welcome {{ username }}</h1>
             <h2>Profile Page</h2>

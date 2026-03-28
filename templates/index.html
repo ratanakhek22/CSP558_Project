@@ -8,25 +8,24 @@
 </head>
 <body>
     <nav>
-        <a href="{{ url_for('union') }}">Go to UNION</a>
+    <a href="{{ url_for('index') }}">Go to Routes</a>
+    <a href="{{ url_for('vuln_login') }}">LOGIN - Vulnerable</a>
+    <a href="{{ url_for('safe_parameterized') }}">LOGIN - Parameterized</a>
+    <a href="{{ url_for('safe_orm') }}">LOGIN - ORM</a>
+    <a href="{{ url_for('vuln_union') }}">UNION - Vulnerable</a>
     </nav>
 
     <main>
-        <h1>Welcome to CSP 558</h1>
-        <h2>Login</h2>
-        <form action="/login" method="post">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required />
-            <br />
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required />
-            <br />
-            <button type="submit">Login</button>
-            {% with messages = get_flashed_messages() %}
-                {% if messages %}
-                    <p style="color: red;">{{ messages[0] }}</p>
-                {% endif %}
-            {% endwith %}
+        <h1>
+            Landing + Routes Page for CSP 558 Final Project
+        </h1>
+        <p>
+            Goal is to compare different mitigation techniques and showcase vunerabilities in sites.
+            The focus is on SQL Injection and Cross Site Execution attacks, both of which are web attacks related to
+            not filtering or being niave to user input as an attack method.
+        </p>
+        <h2>GitHub Repo</h2>
+        <p><a href="https://github.com/ratanakhek22/CSP558_Project">CSP558_Project</a></p>
     </main>
 </body>
 </html>
