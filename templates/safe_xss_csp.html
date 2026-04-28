@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>XSS - CSP</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+</head>
+<body>
+    <nav>
+        <a href="{{ url_for('index') }}">Go to Routes</a>
+    </nav>
+
+    <main>
+        <h1>Comment Board</h1>
+        <h2>Safe — Content Security Policy</h2>
+        <p style="font-size: 0.85rem; color: #64748b; margin-bottom: 1rem;">
+            Protection on this page is handled by a <strong>CSP response header</strong> set in Flask,
+            not by output escaping. The injected script tag will appear in the HTML source,
+            but the browser will refuse to execute it.
+            Open DevTools → Console to see the CSP violation error.
+        </p>
+        <form action="{{ url_for('safe_xss_csp') }}" method="POST">
+            <label for="comment">Leave a comment:</label>
+            <input type="text" id="comment" name="comment" required />
+            <button type="submit">Post</button>
+        </form>
+
+        <hr style="margin: 1.5rem 0; border: none; border-top: 1px solid #e2e8f0;" />
+
+        <p style="font-size: 0.9rem; color: #334155; margin-bottom: 0.75rem;">Comments:</p>
+        <ul style="list-style: none; padding: 0; text-align: left;">
+            {% for comment in comments %}
+                {# | safe used intentionally — escaping is disabled to show CSP acting alone #}
+                <li style="background: #f1f5f9; border-radius: 8px; padding: 0.6rem 0.9rem; margin-bottom: 0.5rem; font-size: 0.92rem;">
+                    {{ comment | safe }}
+                </li>
+            {% endfor %}
+        </ul>
+    </main>
+</body>
+</html>

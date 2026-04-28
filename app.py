@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, flash, redirect, url_for, session
+from flask import Flask, render_template, request, flash, redirect, url_for, session, make_response
 from flask_sqlalchemy import SQLAlchemy
 import sqlite3
 
@@ -9,6 +9,9 @@ app.secret_key = 'mysupersecretkey'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users_orm.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
+
+# comment storage (mock db)
+xss_comments = {"vuln": [], "escaped": [], "csp": []}
 
 # --- ORM Model ---
 class User(db.Model):
@@ -77,6 +80,12 @@ def vuln_union():
 
     return render_template('vuln_union.html', result=result)
 
+@app.route('/vuln/xss', methods=['GET', 'POST'])
+def vuln_xss():
+    if request.method == 'POST':
+        xss_comments["vuln"].append(request.form['comment'])
+    return render_template('vuln_xss.html', comments=xss_comments["vuln"])
+
 # -----------
 # Safe Routes
 # -----------
@@ -121,6 +130,20 @@ def safe_orm():
         flash("Invalid username or password")
 
     return render_template('safe_login.html', mode='ORM (SQLAlchemy)', route='safe_orm')
+
+@app.route('/safe/xss/escaped', methods=['GET', 'POST'])
+def safe_xss_escaped():
+    if request.method == 'POST':
+        xss_comments["escaped"].append(request.form['comment'])
+    return render_template('safe_xss_escaped.html', comments=xss_comments["escaped"])
+
+@app.route('/safe/xss/csp', methods=['GET', 'POST'])
+def safe_xss_csp():
+    if request.method == 'POST':
+        xss_comments["csp"].append(request.form['comment'])
+    response = make_response(render_template('safe_xss_csp.html', comments=xss_comments["csp"]))
+    response.headers['Content-Security-Policy'] = "script-src 'self'"
+    return response
 
 
 if __name__ == '__main__':
